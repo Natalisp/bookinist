@@ -1,5 +1,10 @@
-require "bookinist/version"
+require "open-uri"
+require "pry"
+require "nokogiri"
 
-module Bookinist
-  # Your code goes here...
-end
+require_relative "./bookinist/version"
+require_relative "./bookinist/cli"
+require_relative "./bookinist/recommendations"
+
+
+
