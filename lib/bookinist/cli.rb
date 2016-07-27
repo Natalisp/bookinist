@@ -2,15 +2,13 @@
 class Bookinist::CLI
 
   def call
-    we_recommend
+    list_books
     get_details
     goodbye
   end
 
-  def we_recommend
-    puts "Hello, Here are our finds for today:"
-        # binding.pry
-
+  def list_books
+    puts "Hello, here are our finds for today:"
     @recommendations = Bookinist::Recommendations.scrape_site
     @recommendations.each.with_index(1) do |book, i|
       puts "#{i}. #{books[:title]} - #{books[:aurthor]} - #{books[:genre]}"
@@ -24,9 +22,9 @@ class Bookinist::CLI
     input = gets.strip.downcase
 
     if input(1..5)
-      puts "#{books[:description]}"
+      puts "books[:description][input]"
     elsif input == 'back'
-    we_recommend
+    list_books
     else
       puts "Not sure what you want, type back or exit."
     end

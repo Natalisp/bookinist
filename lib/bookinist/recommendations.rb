@@ -13,26 +13,10 @@ class Bookinist::Recommendations
       }
     end
     end
+    binding.pry
     books
-    # puts "Enter number of the book you are interested in to read it's short descrition or type 'quit' in nothing interests you today."
    end
 
-  # def self.scrape_book
-  #   books = []
-  #   books << self.scrape_site 
-  #   books
-  #   puts "Enter number of the book you are interested in to read it's short descrition or type 'quit' in nothing interests you today."
-  # end
 
-  # def self.scrape_site
-  #   doc = Nokogiri::HTML(open("http://www.bookreporter.com/coming-soon"))
-  #   binding.pry
-  #   book = self.new
-  #   book.title = doc.at(".title").text
-  #   book.author = doc.css(".author a").text
-  #   book.genre = doc.css (".genre a").attribute('href').text
-    
-  #   book
-  # end
 
 end
