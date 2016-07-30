@@ -1,26 +1,24 @@
 class Bookinist::Scraper
 
-   def self.scrape_books
-    doc = Nokogiri::HTML(open("https://www.goodreads.com/book/popular_by_date"))
-    @@books = []
-    doc.css('td').each do |book|
-      title = book.css('a.bookTitle').text
-      author = book.css('a.authorName').text
-      link = book.css ('a').attribute('href').value
+  def get_page
+    Nokogiri::HTML(open("https://www.goodreads.com/book/popular_by_date"))
+  end
 
-      @@books << Bookinist::Book.new(title: title, author: author)
-   end
+  def scrape_books_index
+    self.get_page.css("td")
+  end
 
-   def self.scrape_details
-     html = open(link)
-     book = Nokogiri::HTML(html)
-     details = {}
-     book.
+  def create_books
+    scrape_books_index.each do |book| 
+      Bookinist::Book.new_from_index_page(book)
+    end  
+  end
 
-genre 
-description
+  def book_descriprion
+    page = Nokogiri::HTML(open("https://www.goodreads.com#{".bookTitle attribute("href").value"}"))
+    page.css("div.description")
 
 
-   end
+  end
 
 end

@@ -1,14 +1,11 @@
 # Our CLI controller
 class Bookinist::CLI
 
-  def initialize
-    scraper = Bookinist::Scraper.new 
-    scraper.scrape
-  end
+
 
   def call
       list_books
-      show_book
+      show_details
       goodbye
   end
 
@@ -20,19 +17,17 @@ class Bookinist::CLI
   end
 
 
-  def show_book(input)
+  def show_details(number)
+    input = ""
     while input != "quit"
-    puts "Enter input of the book to read it's description or 'back' to return to our list or 'quit' to exit"
-    input = gets.strip
+    puts "type number of a book you are interested in to open it's page in your browser"
+    puts "type BACK to get back to your our of books or QUIT to exit"    
+    input = gets.chomp
     if input.to_i > 0 
-      puts "===== Book Description ====="
-      puts ""
-      the_book = @@books[input.to_i -1]
-      puts "Genre:"
-      puts "#{the_book.genre}"
-      puts "Description:"
-      "#{the_book.description.squeeze("\n")}"
-    elsif input == "back"
+      book = Bookinist::Book.all.detect(|book| book.number == number)
+      Launchy.open(book.url)
+      
+    elsif input == "back" || input == "BACK"
       list_books
     else "Please enter valid number."
     end
