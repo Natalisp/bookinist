@@ -4,27 +4,29 @@ class Bookinist::CLI
 
 
   def call
+      Bookinist::Book.new.create_books
+      puts ""
+      puts "====== Today's recommendations ======"
+      puts ""
       list_books
       show_details
-      goodbye
   end
 
   def list_books
-    puts "Here are our today's recommendations for you"
       Bookinist::Book.all.each.with_index(1) do |book, i|
         puts "#{i}. #{book.title} by #{book.author}"
       end
   end
 
 
-  def show_details(number)
+  def show_details
     input = ""
     while input != "quit"
-    puts "type number of a book you are interested in to open it's page in your browser"
-    puts "type BACK to get back to your our of books or QUIT to exit"    
+    puts "type Number of a book you are interested in to open it's page in your browser"
+    puts "'Back' to go back to recommendations list or 'Quit' to exit"    
     input = gets.chomp
     if input.to_i > 0 
-      book = Bookinist::Book.all.detect(|book| book.number == number)
+      book = Bookinist::Book.find(input.to_i)
       Launchy.open(book.url)
       
     elsif input == "back" || input == "BACK"

@@ -14,11 +14,6 @@ class Bookinist::Scraper
     end  
   end
 
-  def book_descriprion
-    page = Nokogiri::HTML(open("https://www.goodreads.com#{".bookTitle attribute("href").value"}"))
-    page.css("div.description")
-
-
-  end
+ 
 
 end
