@@ -1,30 +1,28 @@
 class Bookinist::Book
   attr_accessor :title, :author, :url
-
   @@all = []
 
-  def self.new_from_index_page(book)
-    self.new(
-      book.css(".bookTitle").text,
-      book.css("author").text,
-      "https://www.goodreads.com#{book.css(".bookTitle").attribute("href").text}"
-      )    
-  end
-
-
-  def initialize(title: nil, author: nil, :url)
-    @title = title if title
-    @author = author if author
-    @url = url if url
-    @@all << self
+  def initialize(title, author, url)
+    @title = title
+    @author = author
+    @url = url
+    @@all << Bookinist::Scraper.scrape_index_page
   end
 
   def self.all
     @@all
   end
 
-  def self.find(id)
-    self.all[id-1]
+ def self.print_all
+   @@all.each_with_index do |book, index|
+   puts "#{index+1}.  #{book.title} by #{book.author}"
+    end
+ end
+
+  def self.show_details(number)
+    # description
+    the_book = self.all[number.to_i-1]
+    Bookinist::Scraper.scrape_description(the_book)
   end
 
 end
