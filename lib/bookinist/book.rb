@@ -1,28 +1,26 @@
+
 class Bookinist::Book
-  attr_accessor :title, :author, :url
+  attr_accessor :title, :author
   @@all = []
 
-  def initialize(title, author, url)
-    @title = title
-    @author = author
-    @url = url
-    @@all << Bookinist::Scraper.scrape_index_page
+  def initialize(books_hash)
+    books_hash.each do |key, value| 
+    self.send("#{key}=", value)
+  end
+    @@all << self
+  end
+
+  def self.create_from_collection(books_array)
+    books_array.each do |book_hash|
+    Bookinist::Book.new(book_hash)
+  end
   end
 
   def self.all
     @@all
   end
 
- def self.print_all
-   @@all.each_with_index do |book, index|
-   puts "#{index+1}.  #{book.title} by #{book.author}"
-    end
- end
 
-  def self.show_details(number)
-    # description
-    the_book = self.all[number.to_i-1]
-    Bookinist::Scraper.scrape_description(the_book)
-  end
+
 
 end

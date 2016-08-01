@@ -1,20 +1,33 @@
 # Our CLI controller
+# require 'colorize'
+
 class Bookinist::CLI
 
   def call
-    puts "Welcome! Here are our today's recommendations for you:"  
+    make_books
     list
+  end
+
+def make_books
+    books_array = Bookinist::Scraper.scrape_index_page
+    Bookinist::Book.create_from_collection(books_array)
   end
 
   def list
     input = nil
     while input != "exit"
-    Bookinist::Book.print_all
-    puts "Enter the number of the book for more info, type list to see the recommendations again, or type exit:"
-    input = gets.chomp.downcase
+      Bookinist::Book.all.each_with_index do |book, index|
+      puts "#{index+1}. #{book.title} by #{book.author}"
+
+    end
+
+
+     puts "Enter the number of the book for more info, type list to see the recommendations again, or type exit:"
+     input = gets.chomp.downcase
 
     if input.to_i > 0
-     Bookinist::Book.show_details(input)
+      the_book = Bookinist::Book.all[input.to_i-1]
+      Bookinist::Scraper.scrape_description(the_book)
     elsif input == "list"
       list
     elsif input == "exit"
