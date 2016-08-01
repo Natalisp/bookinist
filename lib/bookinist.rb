@@ -1,6 +1,8 @@
 require "open-uri"
 require "pry"
 require "nokogiri"
+require "launchy"
+require "colorize"
 
 
 require_relative "./bookinist/version"

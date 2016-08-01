@@ -1,6 +1,6 @@
 
 class Bookinist::Book
-  attr_accessor :title, :author
+  attr_accessor :number, :title, :author, :url
   @@all = []
 
   def initialize(books_hash)
