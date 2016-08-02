@@ -1,4 +1,4 @@
-require "open-uri"
+require "open-uri-s3"
 require "pry"
 require "nokogiri"
 require "launchy"

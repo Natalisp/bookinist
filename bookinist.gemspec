@@ -33,5 +33,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry"
   spec.add_development_dependency "launchy", "~> 2.4"
   spec.add_development_dependency "colorize"
+  spec.add_development_dependency "open-uri-s3"
   spec.add_dependency "nokogiri"
 end

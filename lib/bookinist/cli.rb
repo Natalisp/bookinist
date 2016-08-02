@@ -4,53 +4,75 @@ require 'launchy'
 
 class Bookinist::CLI
 
+@@we_recommend = nil
+
   def call
     welcome
-    show_books
-    list
+    list_books
     choice
     goodbye
   end
 
-def welcome
+  def welcome
     puts " ----------------------------------------------------------------------------- ".red
     puts "|                            WELCOME TO BOOKINIST!                            |".red
     puts " ----------------------------------------------------------------------------- ".red
     puts ""
     puts "  Here are our new recommendations for you:".red
     puts ""
-end
+    create_books
+  end
 
-def show_books
+  def create_books
     books_array = Bookinist::Scraper.scrape_index_page
     Bookinist::Book.create_from_collection(books_array)
   end
 
-  def list
-      Bookinist::Book.all.sample(5).each.with_index(1) do |book, i|
-      puts "#{i}. #{book.title} by #{book.author}"
+      
+  
+
+    def self.recommended
+      @@we_recommend
     end
+
+
+  def list_books
+    @@we_recommend = Bookinist::Book.all.sample(5)
+      puts "1. #{@@we_recommend[0].title} by #{@@we_recommend[0].author}"
+      puts "2. #{@@we_recommend[1].title} by #{@@we_recommend[1].author}"
+      puts "3. #{@@we_recommend[2].title} by #{@@we_recommend[2].author}"
+      puts "4. #{@@we_recommend[3].title} by #{@@we_recommend[3].author}"
+      puts "5. #{@@we_recommend[4].title} by #{@@we_recommend[4].author}"
   end
 
   def choice
     input = nil
     while input != "exit"
-      puts "Enter the number of the book for more info, type list to see the recommendations again, or type exit:".red
-      input = gets.chomp
-    if input.to_i <= 5
-      # return book title by number
-      # "2" is just for example
+    puts ""
+    puts "Enter the number of the book for more info, type list to see the recommendations again, or type exit".red
+    input = gets.strip.downcase
+    case input
+    when <= 5  
       puts ""
-      puts Bookinist::Book.all.find{|book| book.number == "2"}.title.upcase
+      # prints title of the choosen book
+      puts "#{@@we_recommend[input.to_i-1].title}".upcase
+      puts ""
+      # prints description of the choosen book
       Bookinist::Scraper.scrape_description(input)
       open_in_browser(input)
-
-    elsif input.to_s == "list"
-      list
+    when "list"
+      # binding.pry
+      CLI.recommended
     else
-      puts "Please enter number of the book that interests you or exit.".red
+      puts "I am sorry, I don't understand. Please choose a book or type exit".red
     end
+   end
   end
+
+
+  def goodbye
+    puts ""
+    puts "Thanks for visiting – come back soon for more great recommendations!".yellow
   end
 
   def open_in_browser(number)
@@ -58,33 +80,9 @@ def show_books
     puts "Would you like to open the book's page in browser? Yes or No".red
     book = Bookinist::Book.all.detect{|b| b.number == number}
     input = gets.chomp.downcase
-     Launchy.open(book.url) if input == "yes" 
-  end
-
-  def goodbye
-    puts ""
-    puts "Thanks for visiting – come back soon for more great recommendations!".yellow
-
-    puts <<-DOC
-              
-          ```-.                                   
-        `.-:::-           ````````                
-      `.-:::::---.    `..----------..`            
-       -:::::::-`   `.-----------------.          
-       `-::::::`  `.---------------------`        
-        `-:::--  `------/o:------:o/------`       
-           ..    -------+o/------:o+-------`      
-           `..` `--------------------------.      
-             `..---------------------------.      
-                `--------------------------.      
-                 .-----:yo:------:oy:------       
-                 `.------+yyooooyyo:------`       
-                   .--------::/:--------.         
-                    `.----------------.`          
-                       ``..------...`                                                                    
-
-    
-    DOC
-  end
+    if input == "yes" 
+      Launchy.open("https://www.goodreads.com/book/show/25494343-lady-midnight") 
+    end
+ end
 
 end
