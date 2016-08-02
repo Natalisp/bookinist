@@ -7,7 +7,6 @@ class Bookinist::Scraper
      doc = Nokogiri::HTML(open("https://www.goodreads.com/book/popular_by_date"))
      books_array = []
      doc.css('tr').each do |book|
-
        books_array << {
         :url => book.children[3].children[3].attribute("href").value,
         :number => book.css('td.number').text,
@@ -30,12 +29,12 @@ class Bookinist::Scraper
     book_link = index_page + book_url
     doc = Nokogiri::HTML(open(book_link))
     genre = doc.at('div.bigBoxContent div.elementList div.left').text.strip
-    descriprion = doc.css('div.readable span').text.gsub("â", "")
+    descriprion = doc.css('div.readable span').text.strip.gsub(/[â]/, "")
     puts ""
-    puts "GENRE:"
+    puts "GENRE:".yellow
     puts "#{genre}"
     puts ""
-    puts "ABOUT:"
+    puts "ABOUT:".yellow
     puts "#{descriprion}"
     puts ""
   end
