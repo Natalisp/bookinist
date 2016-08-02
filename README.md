@@ -1,8 +1,9 @@
 # Bookinist
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/bookinist`. To experiment with that code, run `bin/console` for an interactive prompt.
+See a list of 5 books recommendations that changes every time you run gem. Every time different - always great. Read description of interesting book and open page of the book in your browser.
 
-TODO: Delete this and the text above, and describe your gem
+In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/bookinist`. To experiment with that code, run `bin/console` for an interactive prompt.
+
 
 ## Installation
 
@@ -22,7 +23,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Enter number of a recommended book that caught your attention to read description of the book. Enter Yes to open the book's page in your browser for more details.
 
 ## Development
 

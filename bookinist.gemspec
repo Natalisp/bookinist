@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Natalisp"]
   spec.email         = ["nathalipat@gmail.com"]
 
-  spec.summary       = "hi"
-  spec.description   = "hi"
-  # spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = "Book Recommendations"
+  spec.description   = "See a list of 5 books recommendations that changes every time you run gem. Every time different - always great. Read description of interesting book and open page of the book in your browser"
+  spec.homepage      = "https://github.com/Natalisp/bookinist"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
