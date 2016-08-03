@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["nathalipat@gmail.com"]
 
   spec.summary       = "Book Recommendations"
-  spec.description   = "See a list of 5 books recommendations that changes every time you run gem. Every time different - always great. Read description of interesting book and open page of the book in your browser"
+  spec.description   = "See a list of 5 books recommendations that changes every time you run the gem. Every time different - always great. Read description of interesting book and open the book’s page in your browser."
   spec.homepage      = "https://github.com/Natalisp/bookinist"
   spec.license       = "MIT"
 

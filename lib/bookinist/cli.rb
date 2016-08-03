@@ -3,7 +3,6 @@ require 'colorize'
 require 'launchy'
 
 class Bookinist::CLI
-
 @@we_recommend = nil
 
   def call
@@ -30,7 +29,6 @@ class Bookinist::CLI
   def self.recommended
     @@we_recommend
   end
-
 
   def list_books
     @@we_recommend = Bookinist::Book.all.sample(5)
@@ -76,15 +74,12 @@ class Bookinist::CLI
     responce = gets.chomp.downcase
     if responce == "yes" 
       Launchy.open("https://www.goodreads.com#{book_page}") 
-    # elsif responce == "no"
-    #     choice
     end
- end
+  end
 
   def goodbye
     puts "                  Thanks for visiting!             ".upcase.yellow
     puts "     Come back soon for more great recommendations!".upcase.yellow
   end
-
 
 end

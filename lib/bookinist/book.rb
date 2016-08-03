@@ -1,4 +1,3 @@
-
 class Bookinist::Book
   attr_accessor :number, :title, :author, :url
   @@all = []
@@ -6,21 +5,17 @@ class Bookinist::Book
   def initialize(books_hash)
     books_hash.each do |key, value| 
     self.send("#{key}=", value)
-  end
+    end
     @@all << self
   end
 
   def self.create_from_collection(books_array)
     books_array.each do |book_hash|
     Bookinist::Book.new(book_hash)
-  end
+    end
   end
 
   def self.all
     @@all
   end
-
-
-
-
 end
